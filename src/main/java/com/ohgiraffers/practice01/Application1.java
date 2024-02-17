@@ -2,6 +2,7 @@ package com.ohgiraffers.practice01;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Scanner;
 
 public class Application1 {
 
@@ -110,7 +111,43 @@ public class Application1 {
         showHelp();
 
 
+        /* 키보드로 입력받아 콘솔에 출력하기 */
+        // 입력, 출력
+        /*
+        Scanner scann = new Scanner(System.in);     // 키보드
+
+        System.out.println("정수를 입력하세요.");
+        int choice = scann.nextInt();       // 키보드로 정수 입력
+        System.out.println(choice);
+
+        System.out.println("실수를 입력하세요.");
+        double rchoice = scann.nextDouble();
+        System.out.println(rchoice);
+
+        System.out.println("문자열을 입력하세요.");
+        String schoice = scann.next();
+        System.out.println(schoice);
+        */
+
+        /* 상수 사용하기 */
+        // 상수, 상수값은 변경 할 수 없다.
+        System.out.println(PHYSICAL);
+        int index = PHYSICAL;               // 상수값을 변수에 대입
+        // Math.PI 3.14에서 정의되어 있는 상수
+        double vals = 2 * Math.PI/index;
+        System.out.println(vals + "라디안");
+
+        /* 연산자를 이용하여 바이오리듬 값 구하기 */
+        // 연산 % * /
+        int days = 1200;
+        double vals1 = (days % index) * 2 * Math.PI/index;
+        System.out.println(Math.toDegrees(vals1) + "도");
+
+
+
     }
+    // 상수, 상수값은 변경 할 수 없다.
+    public  static final int PHYSICAL = 23; // 상수(개발자 정의)
     // 메서드 선언
     public static void showHelp() {
         System.out.println("===================================");
