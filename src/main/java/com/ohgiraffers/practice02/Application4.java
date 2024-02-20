@@ -7,6 +7,7 @@ import java.util.Locale;
 public class Application4 {
 
     public static void main(String[] args) {
+        // 중급 70번 까지 있음
         /* String과 char를 이용하여 10진수를 2진수로 변환하기 */
         int ival = 2345;
         int eval = -2345;
@@ -196,6 +197,27 @@ public class Application4 {
         System.out.println(sb1.toString());
 
         /* StringBuilder로 문자열 수정, 변경, 추가하기 */
+        // synchronized 안한 StringBuffer
+        StringBuilder sbu = new StringBuilder();
+        sbu.append("I")
+                .append(" go")
+                .append(" to school.");
+        System.out.println(sbu);
+        sbu.replace(7, 11, "");
+        System.out.println(sbu);
+        sbu.reverse();
+        System.out.println(sbu);
+        sbu.deleteCharAt(3);
+        System.out.println(sbu);
+        sbu.delete(1,3);
+        System.out.println(sbu);
+        String ss = sbu.substring(0);
+        System.out.println(ss);
+        System.out.println(sbu);
+        String st = sbu.substring(0,4);
+        System.out.println(st);
+        System.out.println(sbu);
+
 
 
 
