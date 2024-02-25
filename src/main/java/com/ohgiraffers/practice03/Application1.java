@@ -1,6 +1,10 @@
 package com.ohgiraffers.practice03;
 
+import java.io.*;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Application1 {
 
@@ -49,6 +53,97 @@ public class Application1 {
         System.out.println("---------------------");
         for (Billboard bb : bills) {
             showAbout(bb);
+        }
+
+        /* 빌보드 차트 정보를 파일로 저장하기 */
+        System.out.println("=====빌보드 차트 정보를 파일로 저장하기=====");
+        ArrayList<Billboard> bblist = new ArrayList<>();
+        bblist.add(b1);
+        bblist.add(b2);
+        bblist.add(b3);
+        File f = new File("billboard");
+        if (!f.exists()) {f.mkdirs();}
+
+        try(PrintWriter pw = new PrintWriter(new FileWriter("billboard\\bill.txt", false), true)) {
+            for (Billboard bb : bblist) {
+                    pw.println(bb);
+            }
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+
+        /* 저장한 빌보드 차트 파일 정보를 읽어들이기 */
+        System.out.println("=====저장한 빌보드 차트 파일 정보를 읽어들이기=====");
+        try (BufferedReader br = new BufferedReader(new FileReader("billboard\\bill.txt"))){
+            String msg = "";
+            while ((msg = br.readLine()) != null) {
+                System.out.println(msg);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        /* 빌보드 차트 파일을 저장한 디렉토리 찾기 */
+        System.out.println("=====빌보드 차트 파일을 저장한 디렉토리 찾기=====");
+        File[] fd = f.listFiles();      // 바로 아래 파일들(자식 파일)
+        for (File ff : fd) {
+            String fname = ff.getName();    // 파일명
+            String post = fname.substring(fname.lastIndexOf(".") + 1);
+            System.out.println(fname + " " + post);     // 이름, 확장자
+            System.out.println(ff.getAbsolutePath());   // 전체 경로
+            System.out.println(new Date(ff.lastModified()));    // 수정일
+            try (BufferedReader br = new BufferedReader(new FileReader(ff.getAbsolutePath()))){
+                String msg = "";
+                while ((msg = br.readLine()) != null) {
+                    System.out.println(msg);
+                }
+            }  catch (Exception e) {
+                System.out.println(e);
+            }
+            System.out.println("-----------------------------------");
+
+            /* 빌보드 차트 웹사이트에서 정보 읽어오기 */
+            System.out.println("=====빌보드 차트 웹사이트에서 정보 읽어오기=====");
+            String newUrls = "https://www.billboard.com/charts/hot-100/";
+            URL url = null;
+            try {
+                url = new URL(newUrls);     // 주소 찾기
+                // 주소지에 빨대 꽂기
+                BufferedReader reader = new BufferedReader(
+                        new InputStreamReader(url.openStream(), "euc-kr"), 8);
+                String line = null;
+                while ((line = reader.readLine()) != null) {    // 한 줄씩 읽어서
+                    if (!line.trim().equals("")) {      // 공백이 아니면 출력한다.
+                        System.out.println(line.trim());
+                    }
+                }
+            } catch (Exception e) {
+                System.out.println("Billboard Parsing error !!!");
+            }
+
+        }
+        /* 빌보드 차트 웹사이트에서 정보를 읽어 리스트에 저장하기 */
+        System.out.println("=====빌보드 차트 웹사이트에서 정보를 읽어 리스트에 저장하기=====");
+        ArrayList<String> htmls = new ArrayList<String>();
+        String newUrls = "https://www.billboard.com/charts/hot-100/";
+        URL url = null;
+        try {
+            url = new URL(newUrls);     // 주소 찾기
+            // 주소지에 빨대 꽂기
+            BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(url.openStream(), "euc-kr"),8);
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                if (!line.trim().equals("")) {
+                    htmls.add(line.trim());
+                }
+            }
+        }  catch (Exception e) {
+            System.out.println("Billboard Passing error !!!");
+        }
+        // ArrayList에 저장된 문자열 출력
+        for (String str : htmls) {
+            System.out.println(str);
         }
     }
 
