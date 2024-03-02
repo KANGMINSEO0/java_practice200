@@ -50,6 +50,12 @@ public class Application2 {
 //        rs = RestDay.toWantedDay(rs, 1);     // 1주 전  : s062 RestDay
         rfw.getAllHtml(a + rs);
         rfw.printHtml();
+        
+        /* 이번 주 빌보드 차트를 파싱하여 객체로 저장하기*/
+        ArrayList<String> htmls = new ArrayList<String>();
+        ArrayList<Billboard> billboards = new ArrayList<Billboard>();
+        boolean isConnection = false;
+
     }
     ArrayList<String> htmls = new ArrayList<String>();
     boolean isConnection = false;
