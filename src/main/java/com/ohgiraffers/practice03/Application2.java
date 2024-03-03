@@ -50,11 +50,9 @@ public class Application2 {
 //        rs = RestDay.toWantedDay(rs, 1);     // 1주 전  : s062 RestDay
         rfw.getAllHtml(a + rs);
         rfw.printHtml();
-        
+
         /* 이번 주 빌보드 차트를 파싱하여 객체로 저장하기*/
-        ArrayList<String> htmls = new ArrayList<String>();
-        ArrayList<Billboard> billboards = new ArrayList<Billboard>();
-        boolean isConnection = false;
+        Application2 rfw2 = new Application2();
 
     }
     ArrayList<String> htmls = new ArrayList<String>();
@@ -62,6 +60,7 @@ public class Application2 {
 
     public Application2() {
         htmls.clear();
+        billboards.clear();
     }
 
     public void getAllHtml(String newUrls) {
@@ -117,4 +116,35 @@ public class Application2 {
         }
         return s;
     }
+
+    ArrayList<Billboard> billboards = new ArrayList<Billboard>();
+    public ArrayList<Billboard> getBillboards() {
+        return billboards;
+    }
+    public synchronized void getBillboardData(String msg) {
+        billboards.clear();
+        for (int i = 0; i < htmls.size(); i++) {
+            String ss = htmls.get(i);
+            if (ss.contains(msg)) {
+                String rank = ss.substring(ss.indexOf("chart-row--".length()));
+                rank = rank.substring(0, rank.indexOf("js") - 1).trim();
+                String song = ss.substring(ss.indexOf("Somg Haver-") + "Song Haver-".length());
+                song = song.substring(0, song.indexOf("\"")).trim();
+                int j = 1;
+                String imageurl = htmls.get(i + j);
+                while (true) {
+                    if (imageurl.contains(("images/pref_images")) {
+                        break;
+//                    } else {
+//                        j++;
+//                        imageurl = htmls.get(i + j);
+//                    }
+                }
+                imageurl = imageurl.substring(imageurl.indexOf("https://"));
+                imageurl = imageurl.substring(0, imageurl.indexOf(".jpg") + ".jpg".length());
+
+            }
+        }
+    }
+
 }
