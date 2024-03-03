@@ -36,7 +36,7 @@ public class Application2 {
                     }
                 }
             }
-        }  catch (Exception e) {
+        } catch (Exception e) {
             System.out.println("Billboard Passing error !!!");
         }
         System.out.println("이번 빌보드 차트 날짜 : " + s);
@@ -55,6 +55,7 @@ public class Application2 {
         Application2 rfw2 = new Application2();
 
     }
+
     ArrayList<String> htmls = new ArrayList<String>();
     boolean isConnection = false;
 
@@ -78,7 +79,7 @@ public class Application2 {
                 }
             }
             isConnection = true;
-        }  catch (IOException e) {
+        } catch (IOException e) {
             isConnection = false;
             System.out.println("Billboard Passing error !!!");
         }
@@ -111,16 +112,18 @@ public class Application2 {
                 }
             }
             isConnection = true;
-        }  catch (Exception e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
         return s;
     }
 
     ArrayList<Billboard> billboards = new ArrayList<Billboard>();
+
     public ArrayList<Billboard> getBillboards() {
         return billboards;
     }
+
     public synchronized void getBillboardData(String msg) {
         billboards.clear();
         for (int i = 0; i < htmls.size(); i++) {
@@ -135,11 +138,12 @@ public class Application2 {
                 while (true) {
                     if (imageurl.contains(("images/pref_images")) {
                         break;
-//                    } else {
+                    } //else {
 //                        j++;
 //                        imageurl = htmls.get(i + j);
 //                    }
                 }
+
                 imageurl = imageurl.substring(imageurl.indexOf("https://"));
                 imageurl = imageurl.substring(0, imageurl.indexOf(".jpg") + ".jpg".length());
 
