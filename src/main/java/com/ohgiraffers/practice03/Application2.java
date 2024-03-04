@@ -52,7 +52,12 @@ public class Application2 {
         rfw.printHtml();
 
         /* 이번 주 빌보드 차트를 파싱하여 객체로 저장하기*/
-        Application2 rfw2 = new Application2();
+//        rs = RestDay.toWantedDay(rs, 1); // 1주 전
+        System.out.println(rs);
+        rfw.getAllHtml(a + rs);
+        String str = "<article class = \"chart-row";
+        rfw.getBillboardData(str);
+        rfw.printBillboard();
 
     }
 
@@ -129,26 +134,88 @@ public class Application2 {
         for (int i = 0; i < htmls.size(); i++) {
             String ss = htmls.get(i);
             if (ss.contains(msg)) {
-                String rank = ss.substring(ss.indexOf("chart-row--".length()));
+                String rank = ss.substring(ss.indexOf("chart-row--") + "chart-row--".length());
                 rank = rank.substring(0, rank.indexOf("js") - 1).trim();
-                String song = ss.substring(ss.indexOf("Somg Haver-") + "Song Haver-".length());
+                String song = ss.substring(ss.indexOf("Song Hover-") + "Song Hover-".length());
                 song = song.substring(0, song.indexOf("\"")).trim();
                 int j = 1;
                 String imageurl = htmls.get(i + j);
                 while (true) {
-                    if (imageurl.contains(("images/pref_images")) {
+                    if (imageurl.contains("images/pref_images")) {
                         break;
-                    } //else {
-//                        j++;
-//                        imageurl = htmls.get(i + j);
-//                    }
+                    } else {
+                        j++;
+                        imageurl = htmls.get(i + j);
+                    }
                 }
 
                 imageurl = imageurl.substring(imageurl.indexOf("https://"));
                 imageurl = imageurl.substring(0, imageurl.indexOf(".jpg") + ".jpg".length());
-
+                int k = 1;
+                String artisturl = htmls.get(i + j + k);
+                while (true) {
+                    if (artisturl.contains("chart-row__artist")) {
+                        break;
+                    } else {
+                        j++;
+                        artisturl = htmls.get(i + j + k);
+                    }
+                }
+                artisturl = artisturl.substring(artisturl.indexOf("https://"));
+                artisturl = artisturl.substring(0, artisturl.lastIndexOf("/") + 1);
+                String artist = artisturl.substring(0, artisturl.indexOf(".jpg") + ".jpg".length());
+                artist = toArtis(artist);
+                int m = 1;
+                String lastweek = htmls.get(i + j + k + m);
+                while (true) {
+                    if (lastweek.contains("chart-row__last-week")) {
+                        break;
+                    } else {
+                        j++;
+                        lastweek = htmls.get(i + j + k + m);
+                    }
+                }
+                int n = 1;
+                lastweek = htmls.get(i + j + k + m + n);
+                while (true) {
+                    if (lastweek.contains("chart-row__value")) {
+                        break;
+                    } else {
+                        j++;
+                        lastweek = htmls.get(i + j + k + m + n);
+                    }
+                }
+                lastweek = lastweek.substring(lastweek.indexOf(">") + 1);
+                lastweek = lastweek.substring(0, lastweek.indexOf("<")).trim();
+                // 빌보드 객체에 정보를 저장한다.
+                    Billboard board = new Billboard(
+                            toInt(rank), replace(song),
+                            toInt(__toStr(lastweek)),
+                            imageurl, artisturl, artist);
+                    billboards.add(board);
             }
         }
     }
 
+    public void printBillboard() {
+        for (Billboard dto : billboards) {
+            System.out.println(dto);
+        }
+    }
+    public String replace(String msg) {
+        String ss = msg;
+        ss = ss.replaceAll("&#039;", "");
+        ss = ss.replaceAll("&amp;", "&");
+        ss = ss.replaceAll("&quot;", "\"");
+        return ss.trim();
+    }
+    public String __toStr(String lastweek) {
+        return lastweek.contains("--")? 101 + "":lastweek;
+    }
+    private int toInt(String msg) {
+        return Integer.parseInt(msg == null ? "-1":msg.trim());
+    }
+    public String toArtis(String msg) {
+        return msg.replaceAll("-", " ");
+    }
 }
