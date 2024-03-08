@@ -14,6 +14,8 @@ public class BillboardMain6 {
         rfw.getBillboardData(str);
 
         BillboardPrint.printToCSV(rfw.getBillboards(), "billboard\\" + rs + ".CSV");
+//        BillboardPrint.printToJSON(rfw.getBillboards(), "billboard\\2015-06-02.json");
+        BillboardPrint.printToXML(rfw.getBillboards(), "billboard\\" + rs + ".xml");
 
     }
 }
