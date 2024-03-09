@@ -1,5 +1,8 @@
 plugins {
     id 'java'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.9'
+    id 'org.beryx.jlink' version '2.24.4'
 }
 
 group = 'com.ohgiraffers'
@@ -15,9 +18,22 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter'
     // https://mvnrepository.com/artifact/org.json/json
     implementation 'org.json:json:20231013'
-
+    // https://mvnrepository.com/artifact/org.openjfx/javafx-web
+    implementation 'org.openjfx:javafx-web:18.0.1'
+}
+javafx {
+    version = "21.0.2"
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
 }
 
+mainClassName = "com.ohgiraffers.practice03.Main"
+
+jlink {
+    options = [ '--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages' ]
+    launcher {
+        name = 'java-basic'
+    }
+}
 test {
     useJUnitPlatform()
 }
