@@ -1,12 +1,11 @@
-package com.ohgiraffers.practice03;
-
+package com.ohgiraffers.practice04;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class Application2 {
+public class RequestFromBillboardHot {
 
     public static void main(String[] args) {
 
@@ -39,7 +38,7 @@ public class Application2 {
 
         /* 찾으려는 날짜의 빌보드 차트를 리스트에 저장하기 */
         System.out.println("=====찾으려는 날짜의 빌보드 차트를 리스트에 저장하기=====");
-        Application2 rfw = new Application2();
+        com.ohgiraffers.practice03.Application2 rfw = new com.ohgiraffers.practice03.Application2();
         String a = "https://www.billboard.com/charts/hot-100/";
         String rs = rfw.getTimeDate(a);
         System.out.println("이번 주" + rs);
@@ -60,7 +59,7 @@ public class Application2 {
     ArrayList<String> htmls = new ArrayList<String>();
     boolean isConnection = false;
 
-    public Application2() {
+    public RequestFromBillboardHot() {
         htmls.clear();
         billboards.clear();
     }
@@ -184,11 +183,11 @@ public class Application2 {
                 lastweek = lastweek.substring(lastweek.indexOf(">") + 1);
                 lastweek = lastweek.substring(0, lastweek.indexOf("<")).trim();
                 // 빌보드 객체에 정보를 저장한다.
-                    Billboard board = new Billboard(
-                            toInt(rank), replace(song),
-                            toInt(__toStr(lastweek)),
-                            imageurl, artisturl, artist);
-                    billboards.add(board);
+                Billboard board = new Billboard(
+                        toInt(rank), replace(song),
+                        toInt(__toStr(lastweek)),
+                        imageurl, artisturl, artist);
+                billboards.add(board);
             }
         }
     }
