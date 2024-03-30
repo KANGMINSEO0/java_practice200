@@ -45,4 +45,12 @@ public class Card {
             return false;
         }
     }
+
+    public static int compareCard(Card c1, Card c2) {
+        return c1.getCardVal().compareTo(c1.getCardVal());
+    }
+
+    public static int compareRCard(Card c1, Card c2) {
+        return -c1.getCardVal().compareTo(c2.getCardVal());
+    }
 }
