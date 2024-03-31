@@ -4,6 +4,7 @@ import com.ohgiraffers.practice05.CardUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 // 리스트에 서로 다른 카드 20개 저장하기
@@ -52,5 +53,51 @@ public class CardCase {
                 System.out.println();
             }
         }
+    }
+    // 107번 객체 비교를 이용하여 카드 정렬하기
+    public void sort() {
+        Comparator<Card> cmp = new Comparator<Card>() {
+            @Override
+            public int compare(Card c1, Card c2) {
+                return c1.getCardVal().compareTo(c1.getCardVal());
+            }
+        };
+        cards.sort(cmp);
+//        cards.sort(new CardComp());
+        // Collections.sort(cards, new CardComp());
+    }
+    public void rsort() {
+        // 익명 -anonymous
+        cards.sort(new Comparator<Card>() {
+            @Override
+            public int compare(Card c1, Card c2) {
+                return -c1.getCardVal().compareTo(c2.getCardVal());
+            }
+        });
+//        cards.sort(new CardRomp());
+        // Collections.sort(cards, new CardRomp());
+    }
+    // sort를 Lambda로 구현
+    public void lambdasort() {
+        cards.sort((c1, c2) -> {return c1.getCardVal().compareTo(c2.getCardVal());});
+    }
+    public void lambdasort2() {
+        cards.sort(Comparator.comparing(Card::getCardVal));     // comparing
+    }
+    public void lambdasort3() {
+        cards.sort(Card::compareCard);     // static
+    }
+
+    // rsort를 Lambda로 구현
+    public void lambdarsort() {
+        cards.sort(
+                (c1, c2) -> {return -c1.getCardVal().compareTo(c2.getCardVal());});
+    }
+    public void lambdarsort2() {
+        Comparator<Card> mycard = (c1, c2) -> {return c1.getCardVal().compareTo(c2.getCardVal());};
+        cards.sort(mycard.reversed());
+    }
+    public void lambdarsort3() {
+        cards.sort(Card::compareRCard);     // static
     }
 }

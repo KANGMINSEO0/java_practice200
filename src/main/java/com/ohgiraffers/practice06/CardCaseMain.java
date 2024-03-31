@@ -11,5 +11,23 @@ public class CardCaseMain {
         System.out.println("-------------------------");
         cc.shuffle();   // 카드 섞기
         cc.print();
+        System.out.println("-------------------------");
+        cc.sort();
+        cc.print();
+        System.out.println("-------------------------");
+        cc.rsort();
+        cc.print();
+        System.out.println("-------------------------");
+        cc.lambdasort();
+        cc.print();
+        System.out.println("-------------------------");
+        cc.lambdarsort();
+        cc.print();
+        System.out.println("-------------------------");
+        cc.lambdasort2();
+        cc.print();
+        System.out.println("-------------------------");
+        cc.lambdarsort3();
+        cc.print();
     }
 }
