@@ -5,5 +5,6 @@ public class SutdaMain {
 
         Sutda sutda = new Sutda();
         sutda.play();
+        System.out.println();
     }
 }
