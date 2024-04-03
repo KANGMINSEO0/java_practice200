@@ -20,7 +20,7 @@ public class EasyBoxingMain {
         System.out.println(intNm1);
 
         ArrayList<Integer> lists = new ArrayList<>();
-        lists.add(new Integer(3));
+//        lists.add(new Integer(3));
         lists.add(5);
         int a = lists.get(0);               // <Integer>
         System.out.println(a);
