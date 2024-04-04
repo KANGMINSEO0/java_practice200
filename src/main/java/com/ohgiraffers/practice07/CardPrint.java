@@ -15,6 +15,10 @@ public class CardPrint {
     public void make() {
         cc.make();
     }
+
+    public void shuffle() {
+        cc.shuffle();   // 카드 섞기
+    }
     public void print() {
 
         System.out.println("<플레이어 카드>");
