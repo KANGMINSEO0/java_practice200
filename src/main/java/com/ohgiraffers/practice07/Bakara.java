@@ -19,6 +19,16 @@ public class Bakara {
         if (cp.returnPlayer() < cp.returnDealer()) {
             System.out.println("뱅커 승!");
             whoWin = 2;
+        } else if (cp.returnPlayer() > cp.returnDealer()) {
+            System.out.println("플레이어 승!");
+            whoWin = 1;
+        } else {
+            System.out.println("타이!");
+            whoWin = 3;
         }
+    }
+
+    public int getWhoWin() {
+        return whoWin;
     }
 }
